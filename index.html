@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>Magetool</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts/reset-fonts.css&2.8.0r4/build/base/base-min.css">
+    <style type="text/css">
+      html { text-align:center; }
+      body { font-size:123.1%; margin:0 auto; text-align:left; width:30em; }
+      h1,h2,h3 { margin:1em 0 0 0; }
+      li { margin-bottom:1em; }
+      pre { background:#d8e3ee; padding:10px; width:auto; }
+      .u { font-family:sans-serif; }
+      #footer { border-top:1px solid #000; color:#666; padding-top:10px; font-size:61.54%; }
+    </style>
+  </head>
+  <body>
+    <h1><img src="images/mt_logo.png" width="289" height="82" alt="Magetool"></h1>
+    <p><a href="http://jhckragh.github.com/magetool">Magetool</a> is an open source <abbr title="Command-Line Interface">CLI</abbr> utility designed to automate common tasks in <a href="http://www.magentocommerce.com/">Magento</a> module development.</p>
+    <p>Often when you're developing a custom module you find yourself
+performing certain tasks over and over again, e.g.,</p>
+    <ul>
+      <li>Creating a directory structure for the module and activating it</li>
+      <li>Typing out long class names when creating a new controller, block, model, or helper</li>
+      <li>Editing the module's configuration file the first time you create a controller, block, model, or helper</li>
+    </ul>
+    <p>Because these tasks are repetitive and error-prone, they should be automated. Magetool does just that.</p>
+    <p>See <a href="docs.html">the documentation</a> for a survey of what Magetool can do.</p>
+    <h2>Download and install</h2>
+    <p><strong>Download:</strong> <a href="#">magetool-0.1.0.tar.gz</a></p>
+    <pre><code>tar xvzf magetool-0.1.0.tar.gz
+cd magetool-0.1.0
+python setup.py build
+sudo python setup.py install</code></pre>
+    <p>The <a href="http://github.com/jhckragh/magetool">Magetool source code</a> is hosted on GitHub.</p>
+    <h3>Prerequisites</h3>
+    <p>To run Magetool you need to have the following software installed:</p>
+    <ul>
+      <li><a href="http://www.python.org/download/releases/2.6.2/">Python 2.6</a></li>
+      <li><a href="http://codespeak.net/lxml/index.html#download">lxml</a></li>
+    </ul>
+    <p>On Ubuntu Linux you can install these dependencies through <code>apt</code>:</p>
+    <pre><code>sudo apt-get install python2.6 python-lxml</code></pre>
+    <h2>Example usage</h2>
+    <p>Here’s a sample Magetool workflow:</p>
+    <pre><code>cd ~/public_html/magento/app/code/local/Company
+magetool create module HelloWorld                <span class="u">①</span>
+cd HelloWorld
+magetool create controller index                 <span class="u">②</span></code></pre>
+    <ol>
+      <li>This creates and activates a new shell module called <code>HelloWorld</code>.</li>
+      <li>This defines a skeleton PHP class in <code>controllers/IndexController.php</code> and updates the module’s configuration file accordingly.</li>
+    </ol>
+    <p>See <a href="docs.html">the documentation</a> for more on what Magetool can do.</p>
+    <h2>Discussion and support</h2>
+    <p>Please send feedback and bug reports to jhckragh [at] gmail [dot] com.</p>
+    <div id="footer">
+      <p>Magento is a trademark of Irubin Consulting Inc. Python is a trademark or registered trademark of the Python Software Foundation. Ubuntu is a registered trademark of Canonical Ltd. Linux is a registered trademark of Linus Torvalds. GitHub is a trademark of Logical Awesome.</p>
+      <p>Magetool is not in any way affiliated with or endorsed by any of these trademark owners.</p>
+    </div>
+  </body>
+</html>
