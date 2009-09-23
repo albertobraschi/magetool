@@ -20,154 +20,137 @@
 <h1><a href="http://jhckragh.github.com/magetool/"><img src="images/mt_logo.png" width="289" height="82" alt="Magetool"></a> <span id="doc">documentation</span></h1>
 
 <h2>Creating a module</h2>
-
 <p>To create a new module called NewProduct, navigate to a namespace
-directory and run magetool create module NewProduct:</p>
-
-<pre><code>cd ~/public_html/magento/app/code/local/Company
-magetool create module NewProduct
-</code></pre>
-
-<p>This will create the following directory structure within the
-namespace directory:</p>
-
+   directory (e.g., <code>~/public_html/magento/app/code/local/Company/</code>)
+   and run Magetool like this:
+</p>
+<pre><code>magetool create module NewProduct
+</code></pre><p>This will create the following directory structure within the
+   namespace directory:
+</p>
 <pre><code>- NewProduct/
    |- Block/
    |- controllers/
    |- etc/
-   |  '- config.xml
+   |   '- config.xml
    |- Helper/
    |- Model/
    |- sql/
-</code></pre>
-
-<p>In addition it will activate the module by creating an activation file
-in <code>../../../etc/modules/</code>. (In this case the file will be called
-<code>Company_NewProduct.xml</code>).</p>
+</code></pre><p>In addition it will activate the module by creating an activation file
+   in <code>../../../etc/modules/</code>. (In the example case the file will be
+   called <code>Company_NewProduct.xml</code>.)
+</p>
 
 <h2>Creating a controller</h2>
-
 <p>To create an IndexController in a module, navigate to the module's
-directory and run magetool create controller index:</p>
-
-<pre><code>cd ~/public_html/magento/app/code/local/Company/NewProduct
-magetool create controller index
-</code></pre>
-
-<p>This will do two things:</p>
-
+   directory (e.g., <code>~/public_html/magento/app/code/local/Company/NewProduct/</code>)
+   and run Magetool like this:
+</p>
+<pre><code>magetool create controller index
+</code></pre><p>This will do two things:
+</p>
 <ol>
-<li><p>It will define a skeleton PHP class in <code>controllers/IndexController.php</code>:</p>
-
+ <li><p>It will define a skeleton PHP class in <code>controllers/IndexController.php</code>:
+</p>
 <pre><code>&lt;?php
 class class Company_NewProduct_IndexController
     extends Mage_Core_Controller_Front_Action
 {
 
-
 }
-</code></pre></li>
-<li><p>It will update the module's configuration file, <code>etc/config.xml</code>, to tell Magento that the module now has one or more controllers to
-dispatch to:</p>
+</code></pre>
+ </li>
 
+ <li><p>It will update the module's configuration file, <code>etc/config.xml</code>,
+      to tell Magento that the module now has one or more controllers to
+      dispatch to:
+</p>
 <pre><code>...
 &lt;frontend&gt;
   ...
   &lt;routers&gt;
     &lt;newproduct&gt;
       &lt;use&gt;standard&lt;/use&gt;
-      &lt;args&gt;
-        &lt;module&gt;Company_NewProduct&lt;/module&gt;
-        &lt;frontName&gt;newproduct&lt;/frontName&gt;
-      &lt;/args&gt;
+        &lt;args&gt;
+          &lt;module&gt;Company_NewProduct&lt;/module&gt;
+          &lt;frontName&gt;newproduct&lt;/frontName&gt;
+        &lt;/args&gt;
     &lt;/newproduct&gt;
   &lt;/routers&gt;
   ...
 &lt;/frontend&gt;
 ...
-</code></pre></li>
+</code></pre>
+ </li>
 </ol>
 
 <h2>Creating blocks, helpers, and models</h2>
-
 <p>To create a block called ProductViewCase in a module, navigate to the
-module's directory and invoke Magetool like so:
-
-<pre><code>cd ~/public_html/magento/app/code/local/Company/NewProduct
-magetool create block ProductViewCase
-</code></pre>
-
-<p>(To create a helper or a model with the same name, replace <code>block</code>
-with either <code>helper</code> or <code>model</code>, respectively.)</p>
-
+   module's directory and run Magetool like this:
+</p>
+<pre><code>magetool create block ProductViewCase
+</code></pre><p>(To create a helper or a model with the same name, replace <code>block</code> with
+   either <code>helper</code> or <code>model</code>, respectively.)
+</p>
 <p>This will not only define a skeleton PHP class in
-<code>Block/ProductViewCase.php</code>; it will also update the module's
-configuration file to tell Magento that the module has one or more Block
-classes:</p>
-
+   <code>Block/ProductViewCase.php</code>; it will also update the module's
+   configuration file to tell Mage that the module has one or more Block
+   classes:
+</p>
 <pre><code>...
 &lt;global&gt;
   ...
-    &lt;blocks&gt;
-      &lt;newproduct&gt;
-        &lt;class&gt;Company_NewProduct_Block&lt;/class&gt;
-      &lt;/newproduct&gt;
-    &lt;/blocks&gt;
-    ...
+  &lt;blocks&gt;
+    &lt;newproduct&gt;
+      &lt;class&gt;Company_NewProduct_Block&lt;/class&gt;
+    &lt;/newproduct&gt;
+  &lt;/blocks&gt;
+  ...
 &lt;/global&gt;
 ...
 </code></pre>
-
-<h2>Registering blocks, helpers, or models</h2>
-
-<p>Sometimes you might be working on a module where blocks, helpers, or
-models have been defined manually but where the module's configuration
-file has not been updated accordingly. To register the presence of
-these kinds of classes in the configuration file, use the <code>register</code>
-action, e.g.:</p>
-
-<pre><code>cd ~/public_html/magento/app/code/local/Company/NewProduct
-magetool register block
-</code></pre>
-
-<p>This will update the configuration file the same way <code>magetool create
-block</code> does.</p>
+<h2>Registering classes</h2>
+<p>Sometimes you might be working on a module where classes have been
+   defined manually but where the module's configuration file has not
+   been updated accordingly. To register the presence of these kinds of
+   classes in the configuration file, use the register action, e.g.:
+</p>
+<pre><code>magetool register block
+</code></pre><p>This will update the configuration file the same way <code>magetool create
+block</code> does.
+</p>
 
 <h2>Specifying a superclass</h2>
-
 <p>Normally when you use the create action, Magetool defines the created
-PHP class so that it extends a generic superclass. Running</p>
-
+   PHP class so that it extends a generic superclass. Running
+</p>
 <pre><code>magetool create helper Data
-</code></pre>
-
-<p>for instance, defines a PHP class in <code>Helper/Data.php</code>
-which extends <code>Mage_Core_Helper_Abstract</code>.</p>
-
+</code></pre><p>for instance, defines a PHP class in <code>Helper/Data.php</code> which extends
+   <code>Mage_Core_Helper_Abstract</code>.
+</p>
 <p>To manually specify which superclass a PHP class should extend, use
-the <code>-s</code> or <code>--superclass</code> option:</p>
-
-<pre><code>cd ~/public_html/magento/app/code/local/Company/NewProduct
-magetool -s Mage_Catalog_Helper_Image create helper Data
-</code></pre>
-
-<p>This will define a PHP class in <code>Helper/Data.php</code> which extends
-<code>Mage_Catalog_Helper_Image</code>.</p>
+   the <code>-s</code> or <code>--superclass</code> option:
+</p>
+<pre><code>magetool -s Mage_Catalog_Helper_Image create helper Data
+</code></pre><p>This will define a PHP class in <code>Helper/Data.php</code> which extends
+   <code>Mage_Catalog_Helper_Image</code>.
+</p>
 
 <h2>Overriding a class</h2>
-
-<p>To tell Magento that a created class should override its superclass, use
-the <code>-o</code> or <code>--override</code> option.</p>
-
+<p>To tell Mage that a created class should override its superclass, use
+   the <code>-o</code> or <code>--override</code> option.
+</p>
 <p>To illustrate, the following invocation will define a block in
-<code>Block/Over.php</code> which extends and overrides the class
-<code>Mage_Catalog_Block_Product_View_Type_Simple</code>:</p>
-
-<pre><code>cd ~/public_html/magento/app/code/local/Company/NewProduct
-magetool -os Mage_Catalog_Block_Product_View_Type_Simple create block Over
+   <code>Block/Over.php</code> which extends and overrides the class
+   <code>Mage_Catalog_Block_Product_View_Type_Simple</code>:
+</p>
+<pre><code>magetool -os Mage_Catalog_Block_Product_View_Type_Simple create block Over
 </code></pre>
 <div id="footer">
-<p>Magento is a trademark of Irubin Consulting Inc. Magetool is not in any way affiliated with or endorsed by this trademark owner.</p>
+<p>Magento is a trademark of Irubin Consulting Inc. Magetool is not in
+   any way affiliated with or endorsed by this trademark owner.
+</p>
 </div>
 </body>
 </html>
+
