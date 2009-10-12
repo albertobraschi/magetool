@@ -84,8 +84,8 @@ class class Company_NewProduct_IndexController
  </li>
 </ol>
 
-<h2>Creating blocks, helpers, and models</h2>
-<p>To create a block called ProductViewCase in a module, navigate to the
+<h2>Creating a block, a helper, or a model</h2>
+<p>To create a block called <code>ProductViewCase</code> in a module, navigate to the
    module's directory and run Magetool like this:
 </p>
 <pre><code>magetool create block ProductViewCase
@@ -109,19 +109,26 @@ class class Company_NewProduct_IndexController
 &lt;/global&gt;
 ...
 </code></pre>
-<h2>Registering classes</h2>
-<p>Sometimes you might be working on a module where classes have been
-   defined manually but where the module's configuration file has not
-   been updated accordingly. To register the presence of these kinds of
-   classes in the configuration file, use the register action, e.g.:
+<h2>Creating a layout file</h2>
+<p>To create a layout file called <code>newproduct.xml</code> in
+   <code>app/design/frontend/default/default/</code>, run Magetool like this:
+</p>
+<pre><code>magetool create layout newproduct
+</code></pre>
+<h2>Registering files</h2>
+<p>Sometimes you might be working on a module where classes or layout
+   files have been defined manually but where the module's configuration
+   file has not been updated accordingly. To register the presence of
+   these kinds of files in the configuration file, use the <code>register</code>
+   action, e.g.:
 </p>
 <pre><code>magetool register block
 </code></pre><p>This will update the configuration file the same way <code>magetool create
-block</code> does.
+block</code> does but will not actually create any new files.
 </p>
 
 <h2>Specifying a superclass</h2>
-<p>Normally when you use the create action, Magetool defines the created
+<p>Normally when you use the <code>create</code> action, Magetool defines the created
    PHP class so that it extends a generic superclass. Running
 </p>
 <pre><code>magetool create helper Data
