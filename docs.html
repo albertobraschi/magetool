@@ -6,12 +6,12 @@
 <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts/reset-fonts.css&2.8.0r4/build/base/base-min.css">
 <style type="text/css">
   html { text-align:center; }
-  body { font-size:108%; margin:0 auto; text-align:left; width:30em; }
+  body { font-size:123.1%; margin:0 auto; text-align:left; width:30em; }
   h1,h2,h3 { margin:1em 0 0 0; position:relative; }
   li { margin-bottom:1em; }
   pre { background:#d8e3ee; padding:10px; width:100%; overflow:auto; }
   .u { font-family:sans-serif; }
-  #doc { bottom:11px; color:#fb8b00; position:absolute; right:45px; }
+  #doc { bottom:11px; color:#fb8b00; position:absolute; right:90px; }
   #footer { border-top:1px solid #000; color:#666; padding-top:10px; font-size:61.54%; }
 </style>
 </head>
@@ -19,7 +19,7 @@
 
 <h1><a href="http://jhckragh.github.com/magetool/"><img src="images/mt_logo.png" width="289" height="82" alt="Magetool"></a> <span id="doc">documentation</span></h1>
 
-<h2>Creating a module</h2>
+<h2>Creating modules</h2>
 <p>To create a new module called NewProduct, navigate to a namespace
    directory (e.g., <code>~/public_html/magento/app/code/local/Company/</code>)
    and run Magetool like this:
@@ -41,7 +41,7 @@
    called <code>Company_NewProduct.xml</code>.)
 </p>
 
-<h2>Creating a controller</h2>
+<h2>Creating controllers</h2>
 <p>To create an IndexController in a module, navigate to the module's
    directory (e.g., <code>~/public_html/magento/app/code/local/Company/NewProduct/</code>)
    and run Magetool like this:
@@ -84,7 +84,7 @@ class class Company_NewProduct_IndexController
  </li>
 </ol>
 
-<h2>Creating a block, a helper, or a model</h2>
+<h2>Creating blocks, helpers, and models</h2>
 <p>To create a block called <code>ProductViewCase</code> in a module, navigate to the
    module's directory and run Magetool like this:
 </p>
@@ -92,10 +92,11 @@ class class Company_NewProduct_IndexController
 </code></pre><p>(To create a helper or a model with the same name, replace <code>block</code> with
    either <code>helper</code> or <code>model</code>, respectively.)
 </p>
-<p>This will not only define a skeleton PHP class in
-   <code>Block/ProductViewCase.php</code>; it will also update the module's
-   configuration file to tell Mage that the module has one or more Block
-   classes:
+<p>This will Do The Right Thing. In the case of blocks and helpers, it
+   will define a skeleton PHP class in <code>Block/ProductViewCase.php</code> or
+   <code>Helper/ProductViewCase.php</code>. In addition, it will update the module's
+   configuration file to tell Mage that the module has one or more
+   Block/Helper classes, e.g.:
 </p>
 <pre><code>...
 &lt;global&gt;
@@ -108,10 +109,40 @@ class class Company_NewProduct_IndexController
   ...
 &lt;/global&gt;
 ...
-</code></pre>
-<h2>Creating a layout file</h2>
+</code></pre><p>In the case of models the above invocation will define a PHP clas in
+   Model/ProductViewCase.php. Also, it will create a resource model at
+   Model/Mysql4/ProductViewCase.php and update the module's configuration
+   file accordingly.
+</p>
+
+<h2>Note on creating models</h2>
+<p>The syntax for creating models is the same as that for creating blocks
+   and helpers. However, as creating and registering a model is more
+   complex than creating and registering a block or a helper, the <code>model</code>
+   command supports two options for customizing how it is done:
+</p>
+<ul>
+ <li><p><code>-t</code> or <code>--table</code>: This option allows you to specify which table the
+                     model's entity corresponds to.
+</p>
+
+ </li>
+
+ <li><p><code>-i</code> or <code>--id-field-name</code>: This option allows you to specify which
+                             column in the table uniquely identifies
+                 rows in the table.
+</p>
+
+ </li>
+</ul>
+<p>Note that these are <em>options</em>: you don't have to use them. Magetool
+   provides sane defaults for both options.
+</p>
+
+<h2>Creating layout files</h2>
 <p>To create a layout file called <code>newproduct.xml</code> in
-   <code>app/design/frontend/default/default/</code>, run Magetool like this:
+   <code>app/design/frontend/default/default/</code>, run Magetool like this from a
+   module directory (not from within <code>app/design/frontend/default/default/</code>):
 </p>
 <pre><code>magetool create layout newproduct
 </code></pre>
@@ -127,7 +158,7 @@ class class Company_NewProduct_IndexController
 block</code> does but will not actually create any new files.
 </p>
 
-<h2>Specifying a superclass</h2>
+<h2>Specifying superclasses</h2>
 <p>Normally when you use the <code>create</code> action, Magetool defines the created
    PHP class so that it extends a generic superclass. Running
 </p>
@@ -143,7 +174,7 @@ block</code> does but will not actually create any new files.
    <code>Mage_Catalog_Helper_Image</code>.
 </p>
 
-<h2>Overriding a class</h2>
+<h2>Overriding classes</h2>
 <p>To tell Mage that a created class should override its superclass, use
    the <code>-o</code> or <code>--override</code> option.
 </p>
